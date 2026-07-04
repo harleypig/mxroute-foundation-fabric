@@ -1,0 +1,20 @@
+# Terraform CLI config for LOCAL DEVELOPMENT ONLY — points Terraform at the
+# locally built terraform-provider-mxroute binary in .dev/, because the
+# provider is not yet published to the Terraform Registry.
+#
+# Build the binary and use this file:
+#   ( cd ../terraform-provider-mxroute && go build -o \
+#       ../mxroute-foundation-fabric/.dev/terraform-provider-mxroute . )
+#   export TF_CLI_CONFIG_FILE="$PWD/dev.tfrc"
+#   terraform -chdir=modules/mxroute_domain test
+#
+# With a dev_override in effect Terraform skips `init` for this provider and
+# prints a warning — that is expected. Once the provider is published, drop
+# this file and consume the provider from the Registry normally.
+provider_installation {
+  dev_overrides {
+    "harleypig/mxroute" = "/home/harleypig/projects/mxroute-foundation-fabric/.dev"
+  }
+
+  direct {}
+}

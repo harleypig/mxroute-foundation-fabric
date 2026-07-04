@@ -1,0 +1,71 @@
+# Plan-only tests for the mxroute_email_account module. command = plan never
+# creates real infrastructure; mock_provider satisfies provider config so no
+# MXroute credentials are needed. Terraform still loads the real provider
+# schema (via the dev_override), so the binary must be built first — see
+# ../../../dev.tfrc. password_wo is a write-only attribute, so this needs
+# Terraform >= 1.11 (provider.tf already sets that).
+#
+# Run: TF_CLI_CONFIG_FILE="$PWD/dev.tfrc" \
+#        terraform -chdir=modules/mxroute_email_account test
+
+mock_provider "mxroute" {}
+
+variables {
+  email_accounts = {
+    primary = {
+      domain      = "example.com"
+      username    = "postmaster"
+      password_wo = "s3cr3t-p4ssw0rd"
+    }
+  }
+}
+
+run "valid_account_plans" {
+  command = plan
+
+  assert {
+    condition     = length(mxroute_email_account.email_accounts) == 1
+    error_message = "expected exactly one planned email account"
+  }
+}
+
+run "account_passes_through" {
+  command = plan
+
+  assert {
+    condition     = mxroute_email_account.email_accounts["primary"].domain == "example.com"
+    error_message = "the configured domain should pass through to the resource"
+  }
+}
+
+run "rejects_bad_domain" {
+  command = plan
+
+  variables {
+    email_accounts = {
+      bad = {
+        domain      = "not a domain"
+        username    = "postmaster"
+        password_wo = "s3cr3t-p4ssw0rd"
+      }
+    }
+  }
+
+  expect_failures = [var.email_accounts]
+}
+
+run "rejects_empty_username" {
+  command = plan
+
+  variables {
+    email_accounts = {
+      bad = {
+        domain      = "example.com"
+        username    = ""
+        password_wo = "s3cr3t-p4ssw0rd"
+      }
+    }
+  }
+
+  expect_failures = [var.email_accounts]
+}

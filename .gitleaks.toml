@@ -1,0 +1,9 @@
+# gitleaks config for mxroute-foundation-fabric.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Dummy passwords in plan-only .tftest.hcl fixtures. These modules' write-only password inputs require a string in the test config; the tests are credential-free (command = plan, mock_provider) and never touch a real account (see .claude/TESTS.md), so the values are throwaway placeholders, not secrets."
+paths = [
+  '''modules/.*/tests/.*\.tftest\.hcl$''',
+]

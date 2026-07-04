@@ -1,0 +1,70 @@
+# Plan-only tests for the mxroute_forwarder module. command = plan never
+# creates real infrastructure; mock_provider satisfies provider config so no
+# MXroute credentials are needed. Terraform still loads the real provider
+# schema (via the dev_override), so the binary must be built first — see
+# ../../../dev.tfrc.
+#
+# Run: TF_CLI_CONFIG_FILE="$PWD/dev.tfrc" \
+#        terraform -chdir=modules/mxroute_forwarder test
+
+mock_provider "mxroute" {}
+
+variables {
+  forwarders = {
+    sales = {
+      domain       = "example.com"
+      alias        = "sales"
+      destinations = ["owner@example.com"]
+    }
+  }
+}
+
+run "valid_forwarder_plans" {
+  command = plan
+
+  assert {
+    condition     = length(mxroute_forwarder.forwarders) == 1
+    error_message = "expected exactly one planned forwarder"
+  }
+}
+
+run "forwarder_passes_through" {
+  command = plan
+
+  assert {
+    condition     = mxroute_forwarder.forwarders["sales"].alias == "sales"
+    error_message = "the configured alias should pass through to the resource"
+  }
+}
+
+run "rejects_bad_domain" {
+  command = plan
+
+  variables {
+    forwarders = {
+      bad = {
+        domain       = "not a domain"
+        alias        = "sales"
+        destinations = ["owner@example.com"]
+      }
+    }
+  }
+
+  expect_failures = [var.forwarders]
+}
+
+run "rejects_bad_destination" {
+  command = plan
+
+  variables {
+    forwarders = {
+      bad = {
+        domain       = "example.com"
+        alias        = "sales"
+        destinations = ["not an email"]
+      }
+    }
+  }
+
+  expect_failures = [var.forwarders]
+}

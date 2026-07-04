@@ -1,0 +1,33 @@
+# terraform-docs config for the reusable modules under modules/. These are
+# meant to be consumed, so their README shows the full Inputs/Outputs/Resources
+# tables (all sections, the default). Invoked once per module (non-recursive):
+# modules/ holds flat, sibling modules, so recursion would mis-document each
+# module's tests/ dir as a submodule.
+formatter: markdown table
+
+output:
+  file: README.md
+  mode: inject
+  # Wrap the generated tables in a markdownlint capture/disable/restore block
+  # (INSIDE the BEGIN/END markers so it is regenerated in place — no
+  # duplication on re-runs). The tables are machine-generated and can't be
+  # hand-fixed, so exempt them from markdown lint; restore reinstates the
+  # normal config for the hand-written prose around the block.
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    <!-- markdownlint-capture -->
+    <!-- markdownlint-disable -->
+    {{ .Content }}
+    <!-- markdownlint-restore -->
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: required
+
+# Ignore a local .terraform.lock.hcl (gitignored, not committed). Otherwise a
+# dev who ran `terraform init` bakes the resolved provider version into the
+# Providers table, while the lock-free CI run emits "n/a" — failing the
+# terraform-docs gate. Keeps output deterministic.
+settings:
+  lockfile: false

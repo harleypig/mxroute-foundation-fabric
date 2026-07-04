@@ -1,0 +1,19 @@
+# Terraform working files — state lives elsewhere; lockfiles are per-consumer.
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfplan
+
+# Local provider build + dev-override target (see dev.tfrc). The binary is
+# built on demand from ../terraform-provider-mxroute; never commit it.
+.dev/
+
+# Editor / OS noise
+.DS_Store
+*~
+.*.swp
+.idea/
+*.iml
