@@ -1,0 +1,19 @@
+# Mirrors the maintainer's global yamllint relaxations (see
+# ~/.claude/rules/yamllint.md). Line-length is a warning, not an error, and
+# GitHub Actions `on:` keys and long tool-config lines are allowed, so the
+# gate informs without failing on cosmetic width.
+extends: default
+
+rules:
+  line-length:
+    max: 160
+    level: warning
+  document-start: disable
+  comments-indentation: disable
+  comments:
+    min-spaces-from-content: 1
+  truthy:
+    check-keys: false
+  indentation:
+    spaces: 2
+    indent-sequences: whatever
