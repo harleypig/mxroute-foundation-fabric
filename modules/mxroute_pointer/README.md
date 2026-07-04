@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -41,4 +43,5 @@ No modules.
 | <a name="output_pointer_ids"></a> [pointer\_ids](#output\_pointer\_ids) | Map of each input key to the managed pointer's id (`<domain>/<pointer>`). |
 | <a name="output_targets"></a> [targets](#output\_targets) | Map of each input key to the target the pointer resolves to. |
 | <a name="output_types"></a> [types](#output\_types) | Map of each input key to the pointer type reported by the API (`alias` or `redirect`). |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

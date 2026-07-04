@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -41,4 +43,5 @@ No modules.
 | <a name="output_domain_ids"></a> [domain\_ids](#output\_domain\_ids) | Map of each input key to the managed domain's id (the domain name). |
 | <a name="output_pointers"></a> [pointers](#output\_pointers) | Map of each input key to the domain's pointers (aliases). |
 | <a name="output_ssl_enabled"></a> [ssl\_enabled](#output\_ssl\_enabled) | Map of each input key to whether SSL is enabled (server-managed via MXroute AutoSSL). |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

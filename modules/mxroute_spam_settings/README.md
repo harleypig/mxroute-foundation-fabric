@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -39,4 +41,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_spam_settings_ids"></a> [spam\_settings\_ids](#output\_spam\_settings\_ids) | Map of each input key to the managed spam settings' id (the domain name). |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

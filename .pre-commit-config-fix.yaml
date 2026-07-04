@@ -13,11 +13,20 @@ repos:
     rev: v1.99.5
     hooks:
       - id: terraform_fmt
-      # terraform_docs regenerates each module's README tables in place (config:
-      # .terraform-docs.yml, injected between the BEGIN_TF_DOCS/END_TF_DOCS
-      # markers).
-      - id: terraform_docs
-        args: [--hook-config=--path-to-file=README.md]
+
+  - repo: local
+    hooks:
+      # Regenerate each module's terraform-docs README via bin/build-docs, which
+      # explicitly passes -c .terraform-docs.yml (unlike the stock terraform_docs
+      # hook, which ignores it) so the generated block keeps its markdownlint
+      # capture/disable/restore wrapper. Mirrors terraform-docs-check in the
+      # check config — one code path, so fix and check can't drift apart.
+      - id: terraform-docs
+        name: terraform-docs READMEs (regenerate)
+        language: script
+        entry: bin/build-docs
+        files: (\.tf|\.terraform-docs\.yml)$
+        pass_filenames: false
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.48.0
