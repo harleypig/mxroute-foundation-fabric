@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: MXroute Terraform provider
+    url: https://github.com/harleypig/terraform-provider-mxroute/issues
+    about: Bugs or requests about the provider itself (resources, attributes, auth) belong here, not in the module library.
+  - name: MXroute API documentation
+    url: https://api.mxroute.com/docs
+    about: Reference for the underlying API the provider wraps.

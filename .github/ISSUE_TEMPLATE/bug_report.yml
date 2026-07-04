@@ -1,0 +1,87 @@
+name: Bug report
+description: Report a bug in an mxroute-foundation-fabric module.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please fill out the fields below so the issue
+        can be reproduced. Redact any secrets (API keys, passwords) from configs
+        and logs before posting.
+
+        If the problem is in the underlying `mxroute` provider rather than a
+        module's interface, please file it in the
+        [provider repo](https://github.com/harleypig/terraform-provider-mxroute/issues)
+        instead.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checklist
+      options:
+        - label: I searched existing issues and this has not already been reported.
+          required: true
+        - label: The bug is in a module's interface (variables/validation/outputs), not the provider itself.
+          required: false
+  - type: input
+    id: module_ref
+    attributes:
+      label: Module version (git ref)
+      description: The tag or commit you source the module at (`?ref=...`).
+      placeholder: "v0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: provider_version
+    attributes:
+      label: Provider version
+      description: The `mxroute` provider version in use.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: terraform_version
+    attributes:
+      label: Terraform version
+      description: Output of `terraform version`.
+      placeholder: "1.14.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: modules
+    attributes:
+      label: Affected module(s)
+      description: Which modules are involved? Select all that apply.
+      multiple: true
+      options:
+        - mxroute_domain
+        - mxroute_email_account
+        - mxroute_forwarder
+        - mxroute_pointer
+        - mxroute_catch_all
+        - mxroute_spam_settings
+        - mxroute_spam_blacklist_entry
+        - mxroute_spam_whitelist_entry
+        - mxroute_reseller_package
+        - mxroute_reseller_user
+        - repo tooling / CI
+        - other / unsure
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, including what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Module configuration
+      description: A minimal module call that reproduces the issue.
+      render: hcl
+  - type: textarea
+    id: logs
+    attributes:
+      label: Terraform output / logs
+      description: Relevant output (plan/validate/test), ideally with `TF_LOG=DEBUG`. Redact secrets.
+      render: shell
