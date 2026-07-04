@@ -1,0 +1,41 @@
+name: Feature request
+description: Suggest a new module or a change to a module's interface.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. A module can only expose what the
+        `mxroute` provider supports — if your request needs a new resource,
+        attribute, or endpoint, it likely depends on a change in the
+        [provider repo](https://github.com/harleypig/terraform-provider-mxroute)
+        (which in turn depends on the
+        [MXroute API](https://api.mxroute.com/docs)). Please link the relevant
+        provider resource or API endpoint below.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checklist
+      options:
+        - label: I searched existing issues and this has not already been requested.
+          required: true
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Use case
+      description: What are you trying to accomplish, and why is it not possible with the modules today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed module interface
+      description: If you have one, sketch the module call (variables/outputs) you would like to write.
+      render: hcl
+  - type: input
+    id: provider_reference
+    attributes:
+      label: Provider / API reference
+      description: Link to the provider resource or MXroute API endpoint this depends on, if any.
+      placeholder: "https://api.mxroute.com/docs#..."
