@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -43,4 +45,5 @@ No modules.
 | <a name="output_sent"></a> [sent](#output\_sent) | Map of each input key to the number of messages sent in the current window. |
 | <a name="output_suspended"></a> [suspended](#output\_suspended) | Map of each input key to whether the mailbox is suspended. |
 | <a name="output_usage"></a> [usage](#output\_usage) | Map of each input key to the mailbox's current storage usage in megabytes. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

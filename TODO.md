@@ -2,9 +2,9 @@
 
 ## QA Tooling Setup
 
-- [ ] `tflint` per module (QA dim 2, Lint) — Planned.
-- [ ] `trivy config` over modules (QA dim 5, Security/SAST) — Planned.
-- [ ] terraform-docs check gate wired into CI (QA dim 13).
+- [x] `tflint` per module (QA dim 2, Lint) — gated in pre-commit + CI.
+- [x] `trivy config` over modules (QA dim 5, Security/SAST) — gated in pre-commit + CI.
+- [x] terraform-docs check gate (QA dim 13) — `bin/build-docs --check`, gated in pre-commit + CI.
 
 ## Provider dependency
 

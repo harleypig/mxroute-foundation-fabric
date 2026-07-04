@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -40,4 +42,5 @@ No modules.
 |------|-------------|
 | <a name="output_package_ids"></a> [package\_ids](#output\_package\_ids) | Map of each input key to the managed package's id (the package name). |
 | <a name="output_settings"></a> [settings](#output\_settings) | Map of each input key to the package's computed settings (the typed limits MXroute parsed from the configured strings). |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

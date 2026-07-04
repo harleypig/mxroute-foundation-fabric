@@ -13,6 +13,7 @@ env:
   # release binary via a dev-override. Bump when the provider releases.
   PROVIDER_VERSION: "0.1.0"
   TERRAFORM_VERSION: "1.14.0"
+  TERRAFORM_DOCS_VERSION: "0.20.0"
 
 jobs:
   checks:
@@ -27,6 +28,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install terraform-docs
+        run: |
+          set -euo pipefail
+          ver="${TERRAFORM_DOCS_VERSION}"
+          curl -fsSL "https://terraform-docs.io/dl/v${ver}/terraform-docs-v${ver}-linux-amd64.tar.gz" -o /tmp/tfdocs.tgz
+          tar -xzf /tmp/tfdocs.tgz -C /tmp terraform-docs
+          sudo install /tmp/terraform-docs /usr/local/bin/terraform-docs
+          terraform-docs --version
       - name: Run pre-commit (check config)
         uses: pre-commit/action@v3.0.1
         with:

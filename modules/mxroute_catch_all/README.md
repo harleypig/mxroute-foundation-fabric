@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -40,4 +42,5 @@ No modules.
 |------|-------------|
 | <a name="output_catch_all_ids"></a> [catch\_all\_ids](#output\_catch\_all\_ids) | Map of each input key to the managed catch-all policy's id (the domain name). |
 | <a name="output_descriptions"></a> [descriptions](#output\_descriptions) | Map of each input key to the catch-all policy's server-reported description. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

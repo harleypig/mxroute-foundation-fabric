@@ -25,6 +25,38 @@ repos:
     hooks:
       - id: terraform_fmt
 
+  - repo: local
+    hooks:
+      # trivy config — terraform misconfiguration scan (Docker image, so no
+      # local install and no dev-override needed; it is a static scan). Scoped
+      # to the terraform scanner.
+      - id: trivy-config-terraform
+        name: trivy config — terraform misconfig (docker)
+        language: docker_image
+        entry: aquasec/trivy:0.71.2 config --quiet --misconfig-scanners terraform .
+        files: \.tf$
+        pass_filenames: false
+      # tflint catches what terraform validate can't (deprecated syntax,
+      # undocumented/untyped variables, unpinned sources). Docker image,
+      # recursive over modules/, reading .tflint.hcl (bundled terraform ruleset,
+      # recommended preset). No --init / no --deep — credential-free.
+      - id: tflint
+        name: tflint --recursive (docker)
+        language: docker_image
+        entry: ghcr.io/terraform-linters/tflint:v0.63.1 --recursive --no-color
+        files: \.tf$
+        pass_filenames: false
+      # Module READMEs are terraform-docs-generated (bin/build-docs). This gate
+      # fails if any is stale vs its .tf — non-modifying (terraform-docs
+      # --output-check via bin/build-docs --check). Regenerate: bin/build-docs.
+      # Also triggers on .terraform-docs.yml (its template drives the output).
+      - id: terraform-docs-check
+        name: terraform-docs READMEs up to date
+        language: script
+        entry: bin/build-docs --check
+        files: (\.tf|\.terraform-docs\.yml)$
+        pass_filenames: false
+
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.38.0
     hooks:

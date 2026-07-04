@@ -5,6 +5,8 @@ Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -40,4 +42,5 @@ No modules.
 |------|-------------|
 | <a name="output_emails"></a> [emails](#output\_emails) | Map of each input key to the full forwarding address (`<alias>@<domain>`). |
 | <a name="output_forwarder_ids"></a> [forwarder\_ids](#output\_forwarder\_ids) | Map of each input key to the managed forwarder's id (`<domain>/<alias>`). |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->
