@@ -36,14 +36,17 @@ jobs:
           tar -xzf /tmp/tfdocs.tgz -C /tmp terraform-docs
           sudo install /tmp/terraform-docs /usr/local/bin/terraform-docs
           terraform-docs --version
+      - name: Install pre-commit
+        run: pip install pre-commit
       - name: Run pre-commit (check config)
-        uses: pre-commit/action@v3.0.1
         env:
           # no-commit-to-branch is a local edit-time guard; in CI the commit
           # already exists, and on a push to master it would always fail.
           SKIP: no-commit-to-branch
-        with:
-          extra_args: --all-files
+        # Run pre-commit directly rather than via pre-commit/action@v3.0.1 —
+        # that action bundles actions/cache@v4, whose Node 20 runtime triggers
+        # a deprecation warning. The hook environments are cheap to rebuild.
+        run: pre-commit run --all-files --show-diff-on-failure
 
   terraform:
     name: terraform
