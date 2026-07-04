@@ -38,6 +38,10 @@ jobs:
           terraform-docs --version
       - name: Run pre-commit (check config)
         uses: pre-commit/action@v3.0.1
+        env:
+          # no-commit-to-branch is a local edit-time guard; in CI the commit
+          # already exists, and on a push to master it would always fail.
+          SKIP: no-commit-to-branch
         with:
           extra_args: --all-files
 
