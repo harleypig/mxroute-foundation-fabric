@@ -10,6 +10,11 @@ This repo is **generic and reusable**; it holds no account-specific
 configuration. It is consumed by git ref from a root configuration (for
 example, [harleydev][hd], which manages the live harleypig.com account).
 
+**Guides:** the [Quick Start](docs/quick-start.md) walks through standing up a
+domain, mailbox, and forwarder end to end; [Email
+Management](docs/email-management.md) covers mailboxes, forwarders, and spam
+filtering in depth.
+
 ## Modules
 
 Each module under `modules/` wraps the provider resource of the same name:

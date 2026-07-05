@@ -8,7 +8,7 @@
 
 ## Documentation
 
-- [ ] Write a Terraform-oriented quick-setup guide modeled on MXroute's
+- [x] Write a Terraform-oriented quick-setup guide modeled on MXroute's
   quick-setup doc (<https://docs.mxroute.com/docs/quick-setup.html>) but geared
   to this module library — walking through standing up domains, email accounts,
   and forwarders with these modules. Consider a dedicated docs/ subdirectory
