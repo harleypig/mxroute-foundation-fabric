@@ -69,3 +69,26 @@ run "rejects_empty_username" {
 
   expect_failures = [var.email_accounts]
 }
+
+run "password_wo_is_optional" {
+  command = plan
+
+  # An existing mailbox may omit password_wo (the provider requires it only on
+  # create). This plans cleanly against the provider (>= 0.2.0) where the
+  # attribute is optional.
+  variables {
+    email_accounts = {
+      existing = {
+        domain              = "example.com"
+        username            = "postmaster"
+        password_wo_version = 1
+        quota               = 2048
+      }
+    }
+  }
+
+  assert {
+    condition     = mxroute_email_account.email_accounts["existing"].domain == "example.com"
+    error_message = "an account that omits password_wo should still plan"
+  }
+}
