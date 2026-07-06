@@ -12,13 +12,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.2.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.2.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.3.0 |
 
 ## Modules
 

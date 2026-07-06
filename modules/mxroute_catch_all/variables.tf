@@ -17,8 +17,11 @@ variable "catch_alls" {
     error_message = "Each type must be one of: fail, blackhole, address."
   }
 
+  # Mirrors the provider (>= 0.3.0), which treats an empty-string address as
+  # unset: address must be a non-empty value when type is "address", and unset
+  # (null or "") otherwise.
   validation {
-    condition     = alltrue([for obj in values(var.catch_alls) : (obj.type == "address") == (obj.address != null)])
-    error_message = "address must be set when type is \"address\" and null otherwise."
+    condition     = alltrue([for obj in values(var.catch_alls) : obj.type == "address" ? (obj.address != null && obj.address != "") : (obj.address == null || obj.address == "")])
+    error_message = "address must be a non-empty value when type is \"address\", and empty or unset otherwise."
   }
 }

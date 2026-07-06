@@ -26,12 +26,9 @@ gets mail *provisioned* on MXroute; DNS is what makes it *deliver*.
   export MXROUTE_API_KEY="…"   # keep this out of shell history / files
   ```
 
-- **The `harleypig/mxroute` provider.** It is **not yet on the Terraform
-  Registry**, so until it is you point Terraform at a locally built binary via
-  a dev-override — see [Development][dev] in the README (build the binary, then
-  `export TF_CLI_CONFIG_FILE="$PWD/dev.tfrc"`). With the override in effect
-  Terraform prints a "development overrides are in effect" warning on every
-  command — that is expected.
+- **The `harleypig/mxroute` provider.** It is published to the [Terraform
+  Registry][reg], so `terraform init` installs it automatically from the
+  version constraint in your configuration.
 
 ## 1. Configure the provider
 
@@ -171,6 +168,6 @@ packages/users — see the [module list](../README.md#modules), each with its
 own README and examples.
 
 [mx-quick]: https://docs.mxroute.com/docs/quick-setup.html
-[dev]: ../README.md#development
+[reg]: https://registry.terraform.io/providers/harleypig/mxroute/latest
 [lff]: https://github.com/harleypig/linode-foundation-fabric
 [rfc2142]: https://www.rfc-editor.org/rfc/rfc2142

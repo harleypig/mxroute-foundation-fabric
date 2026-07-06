@@ -9,9 +9,6 @@ permissions:
   contents: read
 
 env:
-  # The provider is not yet on the Registry; CI consumes its published GitHub
-  # release binary via a dev-override. Bump when the provider releases.
-  PROVIDER_VERSION: "0.2.0"
   TERRAFORM_VERSION: "1.14.0"
   TERRAFORM_DOCS_VERSION: "0.20.0"
 
@@ -58,35 +55,15 @@ jobs:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
           terraform_wrapper: false
 
-      - name: Fetch the provider release binary into a dev-override
-        run: |
-          set -euo pipefail
-          mkdir -p .dev
-          url="https://github.com/harleypig/terraform-provider-mxroute/releases/download/v${PROVIDER_VERSION}/terraform-provider-mxroute_${PROVIDER_VERSION}_linux_amd64.zip"
-          curl -fsSL "$url" -o /tmp/provider.zip
-          unzip -o /tmp/provider.zip -d /tmp/provider
-          # dev_overrides looks for an executable named terraform-provider-mxroute
-          # in the target directory.
-          install -m 0755 /tmp/provider/terraform-provider-mxroute_v${PROVIDER_VERSION} .dev/terraform-provider-mxroute
-          cat > ci.tfrc <<EOF
-          provider_installation {
-            dev_overrides {
-              "harleypig/mxroute" = "$PWD/.dev"
-            }
-            direct {}
-          }
-          EOF
-
       - name: fmt check
         run: terraform fmt -check -recursive modules/
 
-      - name: validate + test each module
-        env:
-          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/ci.tfrc
+      - name: init + validate + test each module
         run: |
           set -euo pipefail
           for m in modules/*/; do
             echo "::group::$m"
+            terraform -chdir="$m" init -input=false
             terraform -chdir="$m" validate
             terraform -chdir="$m" test
             echo "::endgroup::"

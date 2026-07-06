@@ -1,11 +1,11 @@
 # Plan-only tests for the mxroute_email_account module. command = plan never
 # creates real infrastructure; mock_provider satisfies provider config so no
 # MXroute credentials are needed. Terraform still loads the real provider
-# schema (via the dev_override), so the binary must be built first — see
-# ../../../dev.tfrc. password_wo is a write-only attribute, so this needs
-# Terraform >= 1.11 (provider.tf already sets that).
+# schema from the Registry, so run `terraform init` first. password_wo is
+# a write-only attribute, so this needs Terraform >= 1.11 (provider.tf
+# already sets that).
 #
-# Run: TF_CLI_CONFIG_FILE="$PWD/dev.tfrc" \
+# Run: terraform -chdir=modules/mxroute_email_account init && \
 #        terraform -chdir=modules/mxroute_email_account test
 
 mock_provider "mxroute" {}
@@ -74,7 +74,7 @@ run "password_wo_is_optional" {
   command = plan
 
   # An existing mailbox may omit password_wo (the provider requires it only on
-  # create). This plans cleanly against the provider (>= 0.2.0) where the
+  # create). This plans cleanly against the provider (>= 0.3.0) where the
   # attribute is optional.
   variables {
     email_accounts = {
@@ -91,4 +91,39 @@ run "password_wo_is_optional" {
     condition     = mxroute_email_account.email_accounts["existing"].domain == "example.com"
     error_message = "an account that omits password_wo should still plan"
   }
+}
+
+run "rejects_short_password" {
+  command = plan
+
+  # password_wo has a minimum length of 8 (mirrors provider >= 0.3.0).
+  variables {
+    email_accounts = {
+      bad = {
+        domain      = "example.com"
+        username    = "postmaster"
+        password_wo = "short"
+      }
+    }
+  }
+
+  expect_failures = [var.email_accounts]
+}
+
+run "rejects_limit_over_max" {
+  command = plan
+
+  # limit has an upper bound of 9600 (mirrors provider >= 0.3.0).
+  variables {
+    email_accounts = {
+      bad = {
+        domain      = "example.com"
+        username    = "postmaster"
+        password_wo = "s3cr3t-p4ssw0rd"
+        limit       = 9601
+      }
+    }
+  }
+
+  expect_failures = [var.email_accounts]
 }

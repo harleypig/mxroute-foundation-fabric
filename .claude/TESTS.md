@@ -12,8 +12,8 @@ it is what gates `master`. Real-infrastructure testing is the consuming root
 config's job (harleydev), not this library's.
 
 Terraform still loads the **real provider schema** even with `mock_provider`
-(the mock replaces behavior, not the schema), so the provider binary must be
-available via the dev-override before tests run.
+(the mock replaces behavior, not the schema), so `terraform init` must run
+first to install the provider from the Registry.
 
 ## What is tested
 
@@ -24,17 +24,15 @@ inputs pass through), plus an `expect_failures` run for **each** input
 ## Running
 
 ```sh
-# Build the provider binary once (the dev-override target).
-( cd ../terraform-provider-mxroute && \
-    go build -o ../mxroute-foundation-fabric/.dev/terraform-provider-mxroute . )
-
-export TF_CLI_CONFIG_FILE="$PWD/dev.tfrc"
-
+# `terraform init` installs the provider from the Registry (per module).
 # One module:
+terraform -chdir=modules/mxroute_domain init
 terraform -chdir=modules/mxroute_domain test
 
 # All modules:
-for m in modules/*/; do terraform -chdir="$m" test || exit 1; done
+for m in modules/*/; do
+  terraform -chdir="$m" init && terraform -chdir="$m" test || exit 1
+done
 ```
 
 ## Safety

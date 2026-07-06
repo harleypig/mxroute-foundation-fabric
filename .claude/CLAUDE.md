@@ -11,9 +11,9 @@ hosting, built on the `terraform-provider-mxroute` provider.
   by the consuming root config (harleydev), never here.
 - **The provider is the source of truth.** Each module wraps one `mxroute_*`
   resource; inputs mirror its settable attributes, outputs its computed ones.
-- **The provider is unpublished.** Local dev and CI reach it via a
-  dev-override (`dev.tfrc`) against a built/downloaded binary — see
-  `CONVENTIONS.md` *Toolchain*. Once published, drop the override.
+- **The provider is on the Registry.** Local dev and CI install it with
+  `terraform init` from each module's pinned `provider.tf` — see
+  `CONVENTIONS.md` *Toolchain*.
 - **Tests are credential-free and plan-only** (`mock_provider`,
   `command = plan`). See `TESTS.md`.
 - **`master` is PR-only.** Branch first; never commit on `master`.

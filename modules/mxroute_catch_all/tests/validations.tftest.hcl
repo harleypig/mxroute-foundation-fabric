@@ -1,10 +1,9 @@
 # Plan-only tests for the mxroute_catch_all module. command = plan never
 # creates real infrastructure; mock_provider satisfies provider config so no
 # MXroute credentials are needed. Terraform still loads the real provider
-# schema (via the dev_override), so the binary must be built first — see
-# ../../../dev.tfrc.
+# schema from the Registry, so run `terraform init` first.
 #
-# Run: TF_CLI_CONFIG_FILE="$PWD/dev.tfrc" \
+# Run: terraform -chdir=modules/mxroute_catch_all init && \
 #        terraform -chdir=modules/mxroute_catch_all test
 
 mock_provider "mxroute" {}
@@ -75,6 +74,24 @@ run "rejects_address_type_mismatch" {
       bad = {
         domain = "example.com"
         type   = "address"
+      }
+    }
+  }
+
+  expect_failures = [var.catch_alls]
+}
+
+run "rejects_empty_address_for_address_type" {
+  command = plan
+
+  # An empty-string address is treated as unset (mirrors provider >= 0.3.0), so
+  # type = "address" with address = "" is rejected.
+  variables {
+    catch_alls = {
+      bad = {
+        domain  = "example.com"
+        type    = "address"
+        address = ""
       }
     }
   }

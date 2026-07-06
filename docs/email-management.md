@@ -7,9 +7,9 @@ Forwarders][mx-forwarders], and [Expert Spam Filtering][mx-esf] guides, but as
 Terraform.
 
 New to the library? Start with the [Quick Start](quick-start.md) — it sets up
-the provider (including the dev-override, since the provider is not yet on the
-Registry) and stands up a first domain. The examples below assume that
-provider configuration and a managed domain.
+the provider (installed from the Terraform Registry) and stands up a first
+domain. The examples below assume that provider configuration and a managed
+domain.
 
 As always, these modules manage the **MXroute account side** through the API;
 DNS records (MX / SPF / DKIM / DMARC) are set at your DNS provider — see the
