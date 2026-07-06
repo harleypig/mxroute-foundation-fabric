@@ -3,12 +3,14 @@ variable "forwarders" {
     Email forwarders (aliases) to manage, keyed by an arbitrary identifier.
     Each destination is an email address, or one of the special Exim targets
     ":fail:" (reject the alias at SMTP) or ":blackhole:" (silently discard it).
+    Destinations are an unordered set (provider >= 0.3.0): reordering them does
+    not force a spurious destroy/recreate of a live forwarder.
   EOT
 
   type = map(object({
     domain       = string
     alias        = string
-    destinations = list(string)
+    destinations = set(string)
   }))
 
   validation {

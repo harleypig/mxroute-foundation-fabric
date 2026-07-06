@@ -1,9 +1,9 @@
 # Plan-only tests for the mxroute_reseller_package module. command = plan never
 # creates real infrastructure; mock_provider satisfies provider config so no
 # MXroute credentials are needed. Terraform still loads the real provider schema
-# (via the dev_override), so the binary must be built first — see ../../../dev.tfrc.
+# from the Registry, so run `terraform init` first.
 #
-# Run: TF_CLI_CONFIG_FILE="$PWD/dev.tfrc" \
+# Run: terraform -chdir=modules/mxroute_reseller_package init && \
 #        terraform -chdir=modules/mxroute_reseller_package test
 
 mock_provider "mxroute" {}

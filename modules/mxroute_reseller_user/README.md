@@ -12,13 +12,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.1.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.1.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.3.0 |
 
 ## Modules
 
@@ -34,7 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_users"></a> [users](#input\_users) | Reseller-managed users to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    username            = string<br/>    email               = string<br/>    package             = string<br/>    password_wo         = string<br/>    password_wo_version = optional(number)<br/>    quota               = optional(string)<br/>    suspended           = optional(bool)<br/>  }))</pre> | n/a | yes |
+| <a name="input_users"></a> [users](#input\_users) | Reseller-managed users to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    username            = string<br/>    email               = string<br/>    package             = string<br/>    password_wo         = optional(string)<br/>    password_wo_version = optional(number)<br/>    quota               = optional(string)<br/>    suspended           = optional(bool)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 

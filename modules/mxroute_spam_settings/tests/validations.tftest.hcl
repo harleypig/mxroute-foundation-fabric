@@ -1,10 +1,9 @@
 # Plan-only tests for the mxroute_spam_settings module. command = plan never
 # creates real infrastructure; mock_provider satisfies provider config so no
 # MXroute credentials are needed. Terraform still loads the real provider
-# schema (via the dev_override), so the binary must be built first — see
-# ../../../dev.tfrc.
+# schema from the Registry, so run `terraform init` first.
 #
-# Run: TF_CLI_CONFIG_FILE="$PWD/dev.tfrc" \
+# Run: terraform -chdir=modules/mxroute_spam_settings init && \
 #        terraform -chdir=modules/mxroute_spam_settings test
 
 mock_provider "mxroute" {}

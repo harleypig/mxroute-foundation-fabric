@@ -49,28 +49,20 @@ module "domains" {
 - **Terraform >= 1.11** — several modules expose write-only arguments
   (`mxroute_email_account`, `mxroute_reseller_user` passwords), which Terraform
   added in 1.11.
-- **The `harleypig/mxroute` provider.** It is not yet published to the
-  Terraform Registry; until it is, develop against a local build via a
-  dev-override — see [Development](#development).
+- **The `harleypig/mxroute` provider.** It is published to the Terraform
+  Registry, so `terraform init` installs it automatically.
 
 ## Development
 
-The provider is unpublished, so local `terraform` is pointed at a locally
-built binary through a dev-override:
+The provider is on the Terraform Registry, so local `terraform init` installs
+it from each module's pinned version constraint before its plan-only tests run:
 
 ```sh
-# 1. Build the provider binary into .dev/ (the dev-override target).
-( cd ../terraform-provider-mxroute && \
-    go build -o ../mxroute-foundation-fabric/.dev/terraform-provider-mxroute . )
-
-# 2. Point Terraform at it and run a module's plan-only tests.
-export TF_CLI_CONFIG_FILE="$PWD/dev.tfrc"
+terraform -chdir=modules/mxroute_domain init
 terraform -chdir=modules/mxroute_domain test
 ```
 
-A dev-override makes Terraform skip `init` for the provider and print a
-warning — that is expected. See [`dev.tfrc`](dev.tfrc) and
-[`.claude/TESTS.md`](.claude/TESTS.md).
+See [`.claude/TESTS.md`](.claude/TESTS.md) for the full test layout.
 
 [mx]: https://mxroute.com
 [prov]: https://github.com/harleypig/terraform-provider-mxroute
