@@ -34,7 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_forwarders"></a> [forwarders](#input\_forwarders) | Email forwarders (aliases) to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    domain       = string<br/>    alias        = string<br/>    destinations = list(string)<br/>  }))</pre> | n/a | yes |
+| <a name="input_forwarders"></a> [forwarders](#input\_forwarders) | Email forwarders (aliases) to manage, keyed by an arbitrary identifier.<br/>Each destination is an email address, or one of the special Exim targets<br/>":fail:" (reject the alias at SMTP) or ":blackhole:" (silently discard it). | <pre>map(object({<br/>    domain       = string<br/>    alias        = string<br/>    destinations = list(string)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 

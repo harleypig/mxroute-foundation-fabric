@@ -68,3 +68,29 @@ run "rejects_bad_destination" {
 
   expect_failures = [var.forwarders]
 }
+
+run "accepts_fail_and_blackhole_destinations" {
+  command = plan
+
+  # The Exim special targets :fail: (reject) and :blackhole: (discard) are
+  # valid destinations alongside email addresses.
+  variables {
+    forwarders = {
+      burned = {
+        domain       = "example.com"
+        alias        = "burned"
+        destinations = [":fail:"]
+      }
+      spam = {
+        domain       = "example.com"
+        alias        = "spam"
+        destinations = [":blackhole:"]
+      }
+    }
+  }
+
+  assert {
+    condition     = length(mxroute_forwarder.forwarders) == 2
+    error_message = "forwarders with :fail:/:blackhole: destinations should plan"
+  }
+}
