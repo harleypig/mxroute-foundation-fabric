@@ -11,7 +11,7 @@ permissions:
 env:
   # The provider is not yet on the Registry; CI consumes its published GitHub
   # release binary via a dev-override. Bump when the provider releases.
-  PROVIDER_VERSION: "0.1.0"
+  PROVIDER_VERSION: "0.2.0"
   TERRAFORM_VERSION: "1.14.0"
   TERRAFORM_DOCS_VERSION: "0.20.0"
 

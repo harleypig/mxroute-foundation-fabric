@@ -5,11 +5,13 @@ variable "email_accounts" {
   # for_each map keys (a sensitive value cannot be a resource instance key).
   # The mailbox password is instead marked sensitive at the point of use in
   # main.tf, and password_wo is a write-only attribute the provider never
-  # persists to state.
+  # persists to state. It is optional: the provider requires it only when
+  # creating a mailbox, so an existing mailbox can omit it (the password is
+  # left unchanged). Requires provider >= 0.2.0.
   type = map(object({
     domain              = string
     username            = string
-    password_wo         = string
+    password_wo         = optional(string)
     password_wo_version = optional(number)
     quota               = optional(number)
     limit               = optional(number)

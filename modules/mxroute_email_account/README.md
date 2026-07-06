@@ -12,13 +12,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.1.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.1.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.2.0 |
 
 ## Modules
 
@@ -34,7 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_email_accounts"></a> [email\_accounts](#input\_email\_accounts) | Email accounts (mailboxes) to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    domain              = string<br/>    username            = string<br/>    password_wo         = string<br/>    password_wo_version = optional(number)<br/>    quota               = optional(number)<br/>    limit               = optional(number)<br/>  }))</pre> | n/a | yes |
+| <a name="input_email_accounts"></a> [email\_accounts](#input\_email\_accounts) | Email accounts (mailboxes) to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    domain              = string<br/>    username            = string<br/>    password_wo         = optional(string)<br/>    password_wo_version = optional(number)<br/>    quota               = optional(number)<br/>    limit               = optional(number)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
