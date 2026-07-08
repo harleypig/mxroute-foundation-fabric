@@ -5,7 +5,7 @@ output "domain_ids" {
 
 output "ssl_enabled" {
   value       = { for key, domain in mxroute_domain.domains : key => domain.ssl_enabled }
-  description = "Map of each input key to whether SSL is enabled (server-managed via MXroute AutoSSL)."
+  description = "Map of each input key to whether a TLS certificate is active for the domain. Read-only status: the MXroute API exposes no operation to request or issue a certificate (they are provisioned out-of-band), so this reports status only."
 }
 
 output "pointers" {

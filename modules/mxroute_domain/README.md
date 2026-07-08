@@ -12,13 +12,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.1.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.1.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.4.0 |
 
 ## Modules
 
@@ -42,6 +42,6 @@ No modules.
 |------|-------------|
 | <a name="output_domain_ids"></a> [domain\_ids](#output\_domain\_ids) | Map of each input key to the managed domain's id (the domain name). |
 | <a name="output_pointers"></a> [pointers](#output\_pointers) | Map of each input key to the domain's pointers (aliases). |
-| <a name="output_ssl_enabled"></a> [ssl\_enabled](#output\_ssl\_enabled) | Map of each input key to whether SSL is enabled (server-managed via MXroute AutoSSL). |
+| <a name="output_ssl_enabled"></a> [ssl\_enabled](#output\_ssl\_enabled) | Map of each input key to whether a TLS certificate is active for the domain. Read-only status: the MXroute API exposes no operation to request or issue a certificate (they are provisioned out-of-band), so this reports status only. |
 <!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->
