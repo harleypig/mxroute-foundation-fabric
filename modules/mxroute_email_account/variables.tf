@@ -7,7 +7,9 @@ variable "email_accounts" {
   # main.tf, and password_wo is a write-only attribute the provider never
   # persists to state. It is optional: the provider requires it only when
   # creating a mailbox, so an existing mailbox can omit it (the password is
-  # left unchanged). Requires provider >= 0.3.0.
+  # left unchanged). Requires provider >= 0.3.0. The API enforces password
+  # complexity at create (a mix of uppercase, lowercase, numbers, and special
+  # characters); a too-simple password fails apply with a VALIDATION_ERROR.
   type = map(object({
     domain              = string
     username            = string
