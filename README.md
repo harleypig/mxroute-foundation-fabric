@@ -36,7 +36,7 @@ Each module under `modules/` wraps the provider resource of the same name:
 
 ```hcl
 module "domains" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_domain?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_domain?ref=v1.0.0"
 
   domains = {
     primary = { domain = "example.com" }
