@@ -12,13 +12,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.3.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.3.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 1.0.0 |
 
 ## Modules
 
@@ -34,7 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_email_accounts"></a> [email\_accounts](#input\_email\_accounts) | Email accounts (mailboxes) to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    domain              = string<br/>    username            = string<br/>    password_wo         = optional(string)<br/>    password_wo_version = optional(number)<br/>    quota               = optional(number)<br/>    limit               = optional(number)<br/>  }))</pre> | n/a | yes |
+| <a name="input_email_accounts"></a> [email\_accounts](#input\_email\_accounts) | Email accounts (mailboxes) to manage, keyed by an arbitrary identifier. | <pre>map(object({<br/>    domain              = string<br/>    username            = string<br/>    password_wo         = optional(string)<br/>    password_wo_version = optional(number)<br/>    quota               = optional(number)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
@@ -42,6 +42,7 @@ No modules.
 |------|-------------|
 | <a name="output_emails"></a> [emails](#output\_emails) | Map of each input key to the mailbox's full email address (username@domain). |
 | <a name="output_ids"></a> [ids](#output\_ids) | Map of each input key to the resource identifier (domain/username). |
+| <a name="output_limit"></a> [limit](#output\_limit) | Map of each input key to the mailbox's daily outbound send limit, as reported by the server (read-only; new mailboxes start at the 9600 default). |
 | <a name="output_sent"></a> [sent](#output\_sent) | Map of each input key to the number of messages sent in the current window. |
 | <a name="output_suspended"></a> [suspended](#output\_suspended) | Map of each input key to whether the mailbox is suspended. |
 | <a name="output_usage"></a> [usage](#output\_usage) | Map of each input key to the mailbox's current storage usage in megabytes. |

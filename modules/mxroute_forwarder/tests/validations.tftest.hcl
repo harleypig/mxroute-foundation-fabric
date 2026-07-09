@@ -68,6 +68,24 @@ run "rejects_bad_destination" {
   expect_failures = [var.forwarders]
 }
 
+run "rejects_bad_alias" {
+  command = plan
+
+  # The alias must start with a letter or number and contain only letters,
+  # numbers, dots, underscores, and hyphens (mirrors the provider's validator).
+  variables {
+    forwarders = {
+      bad = {
+        domain       = "example.com"
+        alias        = "bad alias!"
+        destinations = ["owner@example.com"]
+      }
+    }
+  }
+
+  expect_failures = [var.forwarders]
+}
+
 run "accepts_fail_and_blackhole_destinations" {
   command = plan
 

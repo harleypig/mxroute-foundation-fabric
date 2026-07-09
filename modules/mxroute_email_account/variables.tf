@@ -7,16 +7,16 @@ variable "email_accounts" {
   # main.tf, and password_wo is a write-only attribute the provider never
   # persists to state. It is optional: the provider requires it only when
   # creating a mailbox, so an existing mailbox can omit it (the password is
-  # left unchanged). Requires provider >= 0.3.0. The API enforces password
-  # complexity at create (a mix of uppercase, lowercase, numbers, and special
-  # characters); a too-simple password fails apply with a VALIDATION_ERROR.
+  # left unchanged). The API enforces password complexity at create (a mix of
+  # uppercase, lowercase, numbers, and special characters); a too-simple
+  # password fails apply with a VALIDATION_ERROR. `limit` is not an input: the
+  # provider exposes it read-only (>= 1.0.0), so it surfaces as an output only.
   type = map(object({
     domain              = string
     username            = string
     password_wo         = optional(string)
     password_wo_version = optional(number)
     quota               = optional(number)
-    limit               = optional(number)
   }))
 
   validation {
@@ -29,15 +29,9 @@ variable "email_accounts" {
     error_message = "Each email account's username (the local part before the @) must not be empty."
   }
 
-  # Mirrors the provider's own validators (>= 0.3.0): password_wo has a minimum
-  # length of 8, and limit an upper bound of 9600.
+  # Mirrors the provider's own validator: password_wo has a minimum length of 8.
   validation {
     condition     = alltrue([for obj in values(var.email_accounts) : obj.password_wo == null || length(obj.password_wo) >= 8])
     error_message = "Each email account's password_wo, when set, must be at least 8 characters."
-  }
-
-  validation {
-    condition     = alltrue([for obj in values(var.email_accounts) : obj.limit == null || obj.limit <= 9600])
-    error_message = "Each email account's limit, when set, must not exceed 9600."
   }
 }

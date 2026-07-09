@@ -4,6 +4,11 @@ Reusable Terraform module wrapping the `mxroute_spam_settings` MXroute provider 
 Takes a `map(object(...))` and manages one resource per entry (factory
 pattern); outputs are maps keyed by the same input key.
 
+> **Known limitation:** spam **writes** currently fail with `HTTP 500` on the
+> MXroute API (the spam data sources read fine) — a documented provider
+> limitation (mxroute >= 1.0.0) pending an MXroute fix. Plans succeed; an
+> apply against the live API will error until MXroute resolves it.
+
 <!-- BEGIN_TF_DOCS -->
 <!-- markdownlint-capture -->
 <!-- markdownlint-disable -->
@@ -12,13 +17,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.1.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.1.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 1.0.0 |
 
 ## Modules
 
