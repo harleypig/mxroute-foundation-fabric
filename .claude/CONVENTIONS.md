@@ -81,11 +81,14 @@ straight from the Registry.
 ## Versioning & tagging
 
 The library versions as **one unit** — a single semver `vMAJOR.MINOR.PATCH`
-covers all modules (matching the provider/`git.md` policy). `v0.y.z` is alpha
-(breakage expected, loose `y.z`); the `0 → 1` jump declares it stable, after
-which a breaking module-interface change requires a major bump. Tags are
-**annotated**, cut at the merge commit on `master` (the **release-tag** skill).
-A consumer pins a module by `?ref=vX.Y.Z`.
+covers all modules (matching the provider/`git.md` policy). It is now **stable
+at `v1.x`**: the `0 → 1` jump was made at `v1.0.0`, when the library adopted the
+stable `harleypig/mxroute` provider v1.0.0. From here a breaking
+module-interface change requires a **major** bump, a backward-compatible
+feature a **minor**, and a fix a **patch** (the loose `v0.y.z` alpha phase,
+where breakage was expected, is over). Tags are **annotated**, cut at the merge
+commit on `master` (the **release-tag** skill). A consumer pins a module by
+`?ref=vX.Y.Z`.
 
 ## Merge policy
 

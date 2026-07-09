@@ -35,7 +35,7 @@ variable "mailbox_passwords" {
 }
 
 module "email_accounts" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_email_account?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_email_account?ref=v1.0.0"
 
   email_accounts = {
     alice = {
@@ -61,7 +61,7 @@ Forwarders][mx-forwarders]). The `mxroute_forwarder` module manages them;
 
 ```hcl
 module "forwarders" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_forwarder?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_forwarder?ref=v1.0.0"
 
   forwarders = {
     postmaster = {
@@ -98,7 +98,7 @@ modules:
 
 ```hcl
 module "spam_settings" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_spam_settings?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_spam_settings?ref=v1.0.0"
 
   spam_settings = {
     example = { domain = "example.com", high_score = 5 }
@@ -106,7 +106,7 @@ module "spam_settings" {
 }
 
 module "spam_whitelist" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_spam_whitelist_entry?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_spam_whitelist_entry?ref=v1.0.0"
 
   whitelist_entries = {
     newsletter = { domain = "example.com", entry = "news@trusted.example" }

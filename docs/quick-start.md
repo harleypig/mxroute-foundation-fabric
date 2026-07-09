@@ -57,7 +57,7 @@ call manages many domains.
 
 ```hcl
 module "domains" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_domain?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_domain?ref=v1.0.0"
 
   domains = {
     primary = {
@@ -87,7 +87,7 @@ variable "mailbox_passwords" {
 }
 
 module "email_accounts" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_email_account?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_email_account?ref=v1.0.0"
 
   email_accounts = {
     alice = {
@@ -115,7 +115,7 @@ expects every mail domain to accept `postmaster@`.
 
 ```hcl
 module "forwarders" {
-  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_forwarder?ref=v0.1.0"
+  source = "github.com/harleypig/mxroute-foundation-fabric//modules/mxroute_forwarder?ref=v1.0.0"
 
   forwarders = {
     postmaster = {
