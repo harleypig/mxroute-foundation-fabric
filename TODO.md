@@ -2,7 +2,7 @@
 
 ## Provider adoption
 
-- [ ] When the provider ships **v1.0.0** (the 0→1 stability jump), bump
+- [x] When the provider ships **v1.0.0** (the 0→1 stability jump), bump
   every module's provider pin uniformly to `>= 1.0.0`, retiring the current
   selective per-module minimum pinning. That per-module minimum-version
   scheme is an alpha-phase convenience (v0.y.z, breakage expected); once the

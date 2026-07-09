@@ -6,5 +6,4 @@ resource "mxroute_email_account" "email_accounts" {
   password_wo         = sensitive(each.value.password_wo)
   password_wo_version = each.value.password_wo_version
   quota               = each.value.quota
-  limit               = each.value.limit
 }

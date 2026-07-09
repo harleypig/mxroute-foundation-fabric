@@ -18,6 +18,11 @@ output "suspended" {
   description = "Map of each input key to whether the mailbox is suspended."
 }
 
+output "limit" {
+  value       = { for key, account in mxroute_email_account.email_accounts : key => account.limit }
+  description = "Map of each input key to the mailbox's daily outbound send limit, as reported by the server (read-only; new mailboxes start at the 9600 default)."
+}
+
 output "ids" {
   value       = { for key, account in mxroute_email_account.email_accounts : key => account.id }
   description = "Map of each input key to the resource identifier (domain/username)."

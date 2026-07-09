@@ -74,8 +74,8 @@ run "password_wo_is_optional" {
   command = plan
 
   # An existing mailbox may omit password_wo (the provider requires it only on
-  # create). This plans cleanly against the provider (>= 0.3.0) where the
-  # attribute is optional.
+  # create). This plans cleanly against the provider, where the attribute is
+  # optional.
   variables {
     email_accounts = {
       existing = {
@@ -96,31 +96,13 @@ run "password_wo_is_optional" {
 run "rejects_short_password" {
   command = plan
 
-  # password_wo has a minimum length of 8 (mirrors provider >= 0.3.0).
+  # password_wo has a minimum length of 8 (mirrors the provider's validator).
   variables {
     email_accounts = {
       bad = {
         domain      = "example.com"
         username    = "postmaster"
         password_wo = "short"
-      }
-    }
-  }
-
-  expect_failures = [var.email_accounts]
-}
-
-run "rejects_limit_over_max" {
-  command = plan
-
-  # limit has an upper bound of 9600 (mirrors provider >= 0.3.0).
-  variables {
-    email_accounts = {
-      bad = {
-        domain      = "example.com"
-        username    = "postmaster"
-        password_wo = "s3cr3t-p4ssw0rd"
-        limit       = 9601
       }
     }
   }

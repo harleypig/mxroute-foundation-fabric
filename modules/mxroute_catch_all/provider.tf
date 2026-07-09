@@ -4,7 +4,7 @@ terraform {
   required_providers {
     mxroute = {
       source  = "harleypig/mxroute"
-      version = ">= 0.3.0"
+      version = ">= 1.0.0"
     }
   }
 }

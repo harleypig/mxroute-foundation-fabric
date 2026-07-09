@@ -12,13 +12,13 @@ pattern); outputs are maps keyed by the same input key.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
-| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 0.3.0 |
+| <a name="requirement_mxroute"></a> [mxroute](#requirement\_mxroute) | >= 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 0.3.0 |
+| <a name="provider_mxroute"></a> [mxroute](#provider\_mxroute) | >= 1.0.0 |
 
 ## Modules
 
@@ -34,7 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_forwarders"></a> [forwarders](#input\_forwarders) | Email forwarders (aliases) to manage, keyed by an arbitrary identifier.<br/>Each destination is an email address, or one of the special Exim targets<br/>":fail:" (reject the alias at SMTP) or ":blackhole:" (silently discard it).<br/>Destinations are an unordered set (provider >= 0.3.0): reordering them does<br/>not force a spurious destroy/recreate of a live forwarder. | <pre>map(object({<br/>    domain       = string<br/>    alias        = string<br/>    destinations = set(string)<br/>  }))</pre> | n/a | yes |
+| <a name="input_forwarders"></a> [forwarders](#input\_forwarders) | Email forwarders (aliases) to manage, keyed by an arbitrary identifier.<br/>Each destination is an email address, or one of the special Exim targets<br/>":fail:" (reject the alias at SMTP) or ":blackhole:" (silently discard it).<br/>Destinations are an unordered set: reordering them does not force a<br/>spurious destroy/recreate of a live forwarder. | <pre>map(object({<br/>    domain       = string<br/>    alias        = string<br/>    destinations = set(string)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
