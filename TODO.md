@@ -1,17 +1,5 @@
 # TODO
 
-## Provider adoption
-
-- [x] Add a **repo-local skill** `adopt-provider-version`
-  (`.claude/skills/adopt-provider-version/SKILL.md`) for the provider→fabric
-  adoption procedure, done three times by hand (PRs #9, #11, #12) before it
-  was captured: diff the sibling `terraform-provider-mxroute` repo, classify
-  each change from the CHANGELOG (schema-affecting / correctness-fix / doc-only
-  / breaking), selectively bump only the `provider.tf` pins that need it,
-  mirror doc/validator changes into module variables/outputs, regenerate
-  READMEs via `bin/build-docs`, then `terraform init -upgrade` + plan-only
-  tests.
-
 ## API tracking
 
 - [ ] Add a way to detect when the MXroute API changes or adds capabilities
